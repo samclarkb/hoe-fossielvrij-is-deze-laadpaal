@@ -19,6 +19,6 @@ const setupMap = center => {
 		container: 'map',
 		style: 'mapbox://styles/mapbox/streets-v11',
 		center: center,
-		zoomn: 10,
+		zoomn: 16,
 	})
 }
