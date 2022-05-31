@@ -37,3 +37,83 @@ input[type='text']:focus {
 	opacity: 100%;
 	transition: 0.3s;
 }
+
+#open {
+	font-size: 1.5em;
+	position: absolute;
+	bottom: 0;
+	right: 20%;
+	z-index: 1;
+	border: none;
+	background-color: white;
+	width: 2.2em;
+	height: 2.2em;
+	border-radius: 0.2em;
+	transform: translateY(-20%);
+	box-shadow: 2em rgba(0, 0, 0, 0.25);
+}
+
+.popup-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(0, 0, 0, 0.65);
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+	z-index: 1;
+	opacity: 0;
+	pointer-events: none;
+	transition: 0.4s ease;
+}
+
+.popup-container.show {
+	opacity: 100;
+	z-index: 2;
+	pointer-events: all;
+}
+
+.popup h2 {
+	color: rgba(59, 137, 129, 100);
+	margin-top: 1em;
+}
+
+.popup {
+	background-color: rgba(250, 250, 250, 0.925);
+	background-color: rgba(6, 15, 81, 100);
+	color: white;
+	border-radius: 1.5em;
+	width: 75vw;
+	height: 60vh;
+	display: flex;
+	/* justify-content: center; */
+	align-items: center;
+	flex-direction: column;
+	box-shadow: 0.3em 0.3em rgba(0, 0, 0, 0.25);
+	position: relative;
+}
+
+.popup button {
+	position: absolute;
+	background-color: rgba(6, 15, 81, 100);
+	color: white;
+	right: 0;
+	top: 0;
+	transform: translate(1.5em, -1.5em);
+	border: none;
+	font-size: 1.5em;
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 50%;
+	box-shadow: 0.15em 0.1em rgba(0, 0, 0, 0.25);
+}
+
+.mapboxgl-ctrl-group > button {
+	width: 4em;
+	height: 4em;
+	bottom: 0;
+	left: 0;
+	z-index: 1;
+}
