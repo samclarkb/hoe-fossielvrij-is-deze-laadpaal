@@ -51,6 +51,62 @@ const setupMap = () => {
 	)
 }
 
+fetch('/', {
+	method: 'GET',
+	headers: {
+		'Content-Type': 'application/json',
+	},
+	body: JSON.stringify(data),
+})
+	.then(response => response.json())
+	.then(data => {
+		console.log(data)
+		data.forEach(data => {
+			let dataForMap = {
+				type: data.markerType,
+				geometry: {
+					type: 'Laadpunt',
+					coordinates: [data.coordinates.longitude, data.coordinates.latitude],
+				},
+				properties: {
+					title: 'Laadpunt',
+					description:
+						'Provider: ' +
+						data.operatorName +
+						'\nBeschikbaarheid: ' +
+						data.status +
+						'\nGram CO2 uitstoot per kWh: ' +
+						data.sustain,
+					operator: data.operatorName,
+					sustainability: 'Gram CO2 uitstoot met kWh: ' + data.sustain,
+				},
+			}
+			geojson.features.push(dataForMap)
+		})
+		console.log(geojson, 'geojson')
+
+		// add markers to map
+		geojson.features.forEach(element => {
+			loading.style.display = 'none' // delete loading icon
+			// create a HTML element for each feature
+			const el = document.createElement('div')
+			el.className = 'marker'
+
+			// make a marker for each feature and add to the map
+			new mapboxgl.Marker(el)
+				.setLngLat(element.geometry.coordinates)
+				.setPopup(
+					new mapboxgl.Popup({
+						offset: 25,
+					}) // add popups
+						.setHTML(
+							`<h3>${element.properties.title}</h3><p>${element.properties.description}</p>`
+						)
+				)
+				.addTo(map)
+		})
+	})
+
 const close = document.getElementById('close')
 const open = document.getElementById('open')
 const popup = document.getElementById('popup-container')

@@ -24,12 +24,13 @@ app.post('/', async (req, res) => {
 	try {
 		const url = `https://ui-map.shellrecharge.com/api/map/v2/markers/${lon - 0.02}/${
 			lon + 0.02
-		}/${lat - 0.02}/${lat + 0.02}/15'`
+		}/${lat - 0.02}/${lat + 0.02}/15`
 
 		const response = await fetch(url)
 		const data = await response.json()
 
 		res.json(data)
+		console.log(data)
 	} catch (error) {
 		console.error(error)
 		res.json({ error })
