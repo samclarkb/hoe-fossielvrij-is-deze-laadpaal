@@ -122,3 +122,38 @@ input[type='text']:focus {
 	position: absolute;
 	z-index: 1;
 }
+
+.marker {
+	background-image: url('/images/mapbox-icon.png');
+	background-size: cover;
+	width: 2em;
+	height: 2em;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.mapboxgl-popup {
+	max-width: 10vw;
+}
+
+.mapboxgl-popup-content {
+	font-family: 'Roboto-Light', Arial, Helvetica, sans-serif;
+	text-align: center;
+	color: white;
+	background: var(--background-color) !important;
+	font-size: 1.4em !important;
+	line-height: 25px;
+}
+
+.mapboxgl-popup-content h3 {
+	margin: 0 auto;
+}
+
+.mapboxgl-popup-close-button {
+	color: white;
+	font-size: 1em;
+}
+
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+	border-top-color: var(--background-color) !important;
+}

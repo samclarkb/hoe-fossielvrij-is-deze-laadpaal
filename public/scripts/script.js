@@ -1,14 +1,16 @@
 mapboxgl.accessToken =
 	'pk.eyJ1Ijoic2FtY2xhcmtiIiwiYSI6ImNsM3NsMTIwNzAwdWUzYnBjenFwZG1wbjkifQ.fFO4fbulANPhBtywbyszzA'
 
+let data
+
 const succesLocation = position => {
 	let lat = position.coords.latitude
-	let lon = position.coords.longitude
+	let long = position.coords.longitude
 
-	setupMap([lat, lon])
-	console.log(['lat ' + lat, 'lon ' + lon])
+	setupMap([lat, long])
+	console.log(['lat ' + lat, 'long ' + long])
 
-	const data = { lat, lon }
+	data = { lat, long }
 
 	const options = {
 		method: 'POST',
@@ -19,15 +21,17 @@ const succesLocation = position => {
 }
 
 const errorLocation = () => {
-	// setupMap([-20.24, 53.48])
+	data = { lat: 52.351961, long: 4.911941 } // default coords
 }
 
 navigator.geolocation.getCurrentPosition(succesLocation, errorLocation, {
 	enableHighAccuracy: true,
 })
 
+let map
+
 const setupMap = () => {
-	const map = new mapboxgl.Map({
+	map = new mapboxgl.Map({
 		container: 'map',
 		style: 'mapbox://styles/samclarkb/cl3tx4jtp003x14ny7qk1yfs3',
 		center: [4.899431, 52.379189],
@@ -52,7 +56,7 @@ const setupMap = () => {
 }
 
 fetch('/', {
-	method: 'GET',
+	method: 'POST',
 	headers: {
 		'Content-Type': 'application/json',
 	},
@@ -87,7 +91,6 @@ fetch('/', {
 
 		// add markers to map
 		geojson.features.forEach(element => {
-			loading.style.display = 'none' // delete loading icon
 			// create a HTML element for each feature
 			const el = document.createElement('div')
 			el.className = 'marker'
@@ -106,6 +109,27 @@ fetch('/', {
 				.addTo(map)
 		})
 	})
+	.catch(error => {
+		console.log(error)
+	})
+
+let geojson = {
+	type: 'ChargingStations',
+	features: [
+		{
+			type: 'Station',
+			geometry: {
+				type: 'Point',
+				coordinates: [-77.032, 38.913],
+			},
+			properties: {
+				title: 'Mapbox',
+				description: 'Washington, D.C.',
+				iconSize: [40, 40],
+			},
+		},
+	],
+}
 
 const close = document.getElementById('close')
 const open = document.getElementById('open')

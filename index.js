@@ -11,30 +11,39 @@ app.use(express.static(__dirname + '/public'))
 app.use(express.json()) // Makes it possible to parse JSON
 
 app.get('/', async (req, res) => {
-	res.render('home')
+	const data = 'hoi'
+	res.render('home', { data })
 })
 
 app.post('/', async (req, res) => {
-	let lat = req.body.lat
-	let lon = req.body.lon
+	// let lat = req.body.lat
+	// let long = req.body.long
+
+	let lat = 52.351961
+	let long = 4.911941
 
 	console.log(lat)
-	console.log(lon)
+	console.log(long)
 
 	try {
-		const url = `https://ui-map.shellrecharge.com/api/map/v2/markers/${lon - 0.02}/${
-			lon + 0.02
+		const url = `https://ui-map.shellrecharge.com/api/map/v2/markers/${long - 0.02}/${
+			long + 0.02
 		}/${lat - 0.02}/${lat + 0.02}/15`
 
 		const response = await fetch(url)
+
+		console.log(response)
 		const data = await response.json()
 
+		console.log(data.length)
+
+		// console.log(data)
 		res.json(data)
-		console.log(data)
 	} catch (error) {
-		console.error(error)
-		res.json({ error })
+		console.log(error)
+		res.json('kapot')
 	}
+	// res.render('home')
 })
 
 // tell the server to listen on port 7000
