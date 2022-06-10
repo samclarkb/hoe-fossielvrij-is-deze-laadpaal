@@ -16,11 +16,11 @@ app.get('/', async (req, res) => {
 })
 
 app.post('/', async (req, res) => {
-	// let lat = req.body.lat
-	// let long = req.body.long
+	let lat = parseFloat(req.body.lat)
+	let long = parseFloat(req.body.long)
 
-	let lat = 52.351961
-	let long = 4.911941
+	// let lat = 52.351961
+	// let long = 4.911941
 
 	console.log(lat)
 	console.log(long)
@@ -30,20 +30,17 @@ app.post('/', async (req, res) => {
 			long + 0.02
 		}/${lat - 0.02}/${lat + 0.02}/15`
 
+		console.log(url)
+
 		const response = await fetch(url)
 
 		console.log(response)
 		const data = await response.json()
 
-		console.log(data.length)
-
-		// console.log(data)
 		res.json(data)
 	} catch (error) {
 		console.log(error)
-		res.json('kapot')
 	}
-	// res.render('home')
 })
 
 // tell the server to listen on port 7000

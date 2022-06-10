@@ -7,6 +7,11 @@ const succesLocation = position => {
 	let lat = position.coords.latitude
 	let long = position.coords.longitude
 
+	map.flyTo({
+		center: [long, lat],
+		speed: 1,
+	})
+
 	setupMap([lat, long])
 	console.log(['lat ' + lat, 'long ' + long])
 
@@ -15,31 +20,29 @@ const succesLocation = position => {
 	const options = {
 		method: 'POST',
 		headers: { 'Content-type': 'application/json' },
-		body: JSON.stringify(data),
+		body: data,
 	}
 	fetch('/', options)
 }
 
 const errorLocation = () => {
-	data = { lat: 52.351961, long: 4.911941 } // default coords
+	data = { long: 4.911941, lat: 52.351961 } // default coords
 }
 
 navigator.geolocation.getCurrentPosition(succesLocation, errorLocation, {
 	enableHighAccuracy: true,
 })
 
-let map
+const map = new mapboxgl.Map({
+	container: 'map',
+	style: 'mapbox://styles/samclarkb/cl3tx4jtp003x14ny7qk1yfs3',
+	center: [4.899431, 52.379189],
+	zoom: 14,
+	attributionControl: false,
+	followUserLocation: true,
+})
 
 const setupMap = () => {
-	map = new mapboxgl.Map({
-		container: 'map',
-		style: 'mapbox://styles/samclarkb/cl3tx4jtp003x14ny7qk1yfs3',
-		center: [4.899431, 52.379189],
-		zoom: 14,
-		attributionControl: false,
-		followUserLocation: true,
-	})
-
 	// Add geolocate control to the map.
 	map.addControl(
 		new mapboxgl.GeolocateControl({
@@ -96,7 +99,7 @@ fetch('/', {
 			el.className = 'marker'
 
 			// make a marker for each feature and add to the map
-			new mapboxgl.Marker(el)
+			new mapboxgl.Marker(element)
 				.setLngLat(element.geometry.coordinates)
 				.setPopup(
 					new mapboxgl.Popup({
