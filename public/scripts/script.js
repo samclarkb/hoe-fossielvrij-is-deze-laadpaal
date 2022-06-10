@@ -20,9 +20,78 @@ const succesLocation = position => {
 	const options = {
 		method: 'POST',
 		headers: { 'Content-type': 'application/json' },
-		body: data,
+		body: JSON.stringify(data),
 	}
 	fetch('/', options)
+		.then(response => response.json())
+		.then(data => {
+			console.log(data)
+			data.forEach(data => {
+				let dataForMap = {
+					type: data.markerType,
+					geometry: {
+						type: 'Laadpunt',
+						coordinates: [data.coordinates.longitude, data.coordinates.latitude],
+					},
+					properties: {
+						title: 'Laadpaal',
+						description:
+							'Leverancier: ' +
+							data.operatorName +
+							'\nBeschikbaarheid: ' +
+							data.status +
+							'\nUitstoot: ' +
+							data.sustain,
+						operator: data.operatorName,
+						sustainability: 'Gram CO2 uitstoot met kWh: ' + data.sustain,
+					},
+				}
+				geojson.features.push(dataForMap)
+			})
+			console.log(geojson, 'geojson')
+
+			// add markers to map
+			geojson.features.forEach(element => {
+				// create a HTML element for each feature
+				const charger = document.createElement('div')
+				charger.className = 'marker'
+
+				// make a marker for each feature and add to the map
+				const marker = new mapboxgl.Marker(element)
+					.setLngLat(element.geometry.coordinates)
+					.setPopup(
+						new mapboxgl.Popup({
+							offset: 25,
+						}) // add popups
+							.setHTML(
+								`<h3>${element.properties.title}</h3><p>${element.properties.description}</p>`
+							)
+					)
+					.addTo(map)
+			})
+		})
+		.catch(error => {
+			console.log(error)
+		})
+
+	let geojson = {
+		type: 'ChargingStations',
+		features: [
+			{
+				type: 'Station',
+				geometry: {
+					type: 'Point',
+					coordinates: [-77.032, 38.913],
+				},
+				properties: {
+					icon: {
+						iconUrl: '/images/chargingStation.png',
+						iconSize: [40, 40],
+					},
+				},
+			},
+		],
+	}
 }
 
 const errorLocation = () => {
@@ -58,81 +127,15 @@ const setupMap = () => {
 	)
 }
 
-fetch('/', {
-	method: 'POST',
-	headers: {
-		'Content-Type': 'application/json',
-	},
-	body: JSON.stringify(data),
-})
-	.then(response => response.json())
-	.then(data => {
-		console.log(data)
-		data.forEach(data => {
-			let dataForMap = {
-				type: data.markerType,
-				geometry: {
-					type: 'Laadpunt',
-					coordinates: [data.coordinates.longitude, data.coordinates.latitude],
-				},
-				properties: {
-					title: 'Laadpunt',
-					description:
-						'Provider: ' +
-						data.operatorName +
-						'\nBeschikbaarheid: ' +
-						data.status +
-						'\nGram CO2 uitstoot per kWh: ' +
-						data.sustain,
-					operator: data.operatorName,
-					sustainability: 'Gram CO2 uitstoot met kWh: ' + data.sustain,
-				},
-			}
-			geojson.features.push(dataForMap)
-		})
-		console.log(geojson, 'geojson')
+// fetch('/', {
+// 	method: 'POST',
+// 	headers: {
+// 		'Content-Type': 'application/json',
+// 	},
+// 	body: JSON.stringify(data),
+// })
 
-		// add markers to map
-		geojson.features.forEach(element => {
-			// create a HTML element for each feature
-			const el = document.createElement('div')
-			el.className = 'marker'
-
-			// make a marker for each feature and add to the map
-			new mapboxgl.Marker(element)
-				.setLngLat(element.geometry.coordinates)
-				.setPopup(
-					new mapboxgl.Popup({
-						offset: 25,
-					}) // add popups
-						.setHTML(
-							`<h3>${element.properties.title}</h3><p>${element.properties.description}</p>`
-						)
-				)
-				.addTo(map)
-		})
-	})
-	.catch(error => {
-		console.log(error)
-	})
-
-let geojson = {
-	type: 'ChargingStations',
-	features: [
-		{
-			type: 'Station',
-			geometry: {
-				type: 'Point',
-				coordinates: [-77.032, 38.913],
-			},
-			properties: {
-				title: 'Mapbox',
-				description: 'Washington, D.C.',
-				iconSize: [40, 40],
-			},
-		},
-	],
-}
+// }
 
 const close = document.getElementById('close')
 const open = document.getElementById('open')

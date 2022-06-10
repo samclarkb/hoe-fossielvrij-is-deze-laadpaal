@@ -124,23 +124,24 @@ input[type='text']:focus {
 }
 
 .marker {
-	background-image: url('/images/mapbox-icon.png');
+	background-image: url('./images/chargingStation.png');
 	background-size: cover;
-	width: 2em;
+	width: 10em;
 	height: 2em;
 	border-radius: 50%;
 	cursor: pointer;
 }
 
 .mapboxgl-popup {
-	max-width: 10vw;
+	max-width: 20vw;
+	max-height: 30vh;
 }
 
 .mapboxgl-popup-content {
-	font-family: 'Roboto-Light', Arial, Helvetica, sans-serif;
+	/* font-family: 'Roboto-Light', Arial, Helvetica, sans-serif; */
 	text-align: center;
 	color: white;
-	background: var(--background-color) !important;
+	background-color: rgba(59, 137, 129, 0.95);
 	font-size: 1.4em !important;
 	line-height: 25px;
 }
@@ -155,5 +156,6 @@ input[type='text']:focus {
 }
 
 .mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
-	border-top-color: var(--background-color) !important;
+	background-color: rgba(59, 137, 129, 0.9);
+	color: rgba(59, 137, 129, 0.9);
 }

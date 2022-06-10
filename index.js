@@ -11,16 +11,12 @@ app.use(express.static(__dirname + '/public'))
 app.use(express.json()) // Makes it possible to parse JSON
 
 app.get('/', async (req, res) => {
-	const data = 'hoi'
-	res.render('home', { data })
+	res.render('home')
 })
 
 app.post('/', async (req, res) => {
-	let lat = parseFloat(req.body.lat)
-	let long = parseFloat(req.body.long)
-
-	// let lat = 52.351961
-	// let long = 4.911941
+	let lat = req.body.lat
+	let long = req.body.long
 
 	console.log(lat)
 	console.log(long)
