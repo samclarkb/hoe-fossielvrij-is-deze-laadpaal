@@ -124,11 +124,10 @@ input[type='text']:focus {
 }
 
 .marker {
-	background-image: url('./images/chargingStation.png');
+	background-image: url('/images/chargingGreen.svg');
 	background-size: cover;
-	width: 10em;
-	height: 2em;
-	border-radius: 50%;
+	width: 2.5em;
+	height: 3.5em;
 	cursor: pointer;
 }
 

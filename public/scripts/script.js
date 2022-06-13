@@ -54,10 +54,12 @@ const succesLocation = position => {
 			geojson.features.forEach(element => {
 				// create a HTML element for each feature
 				const charger = document.createElement('div')
-				charger.className = 'marker'
+				charger.classList.add('marker')
 
 				// make a marker for each feature and add to the map
-				const marker = new mapboxgl.Marker(element)
+				const marker = new mapboxgl.Marker(charger, {
+					scale: 0.9,
+				})
 					.setLngLat(element.geometry.coordinates)
 					.setPopup(
 						new mapboxgl.Popup({
@@ -83,12 +85,7 @@ const succesLocation = position => {
 					type: 'Point',
 					coordinates: [-77.032, 38.913],
 				},
-				properties: {
-					icon: {
-						iconUrl: '/images/chargingStation.png',
-						iconSize: [40, 40],
-					},
-				},
+				properties: {},
 			},
 		],
 	}
@@ -126,16 +123,6 @@ const setupMap = () => {
 		'bottom-right'
 	)
 }
-
-// fetch('/', {
-// 	method: 'POST',
-// 	headers: {
-// 		'Content-Type': 'application/json',
-// 	},
-// 	body: JSON.stringify(data),
-// })
-
-// }
 
 const close = document.getElementById('close')
 const open = document.getElementById('open')
