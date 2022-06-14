@@ -203,11 +203,20 @@ input[type='text']:focus {
 	transform: translate(-0.5em, 0.25em);
 }
 
-.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip,
-.mapboxgl-popup-anchor-top .mapboxgl-popup-tip,
-.mapboxgl-popup-anchor-right .mapboxgl-popup-tip,
-.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
 	border-top-color: rgba(6, 15, 81, 100) !important;
+}
+
+.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
+	border-bottom-color: rgba(6, 15, 81, 100) !important;
+}
+
+.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
+	border-left-color: rgba(6, 15, 81, 100) !important;
+}
+
+.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
+	border-right-color: rgba(6, 15, 81, 100) !important;
 }
 
 .mapboxgl-ctrl-logo,
@@ -222,4 +231,25 @@ input[type='text']:focus {
 	width: 2.5em;
 	height: 3em;
 	cursor: pointer;
+}
+
+.loader {
+	border: 1.25em solid rgba(250, 250, 250, 0.75);
+	border-radius: 50%;
+	border-top: 1.25em solid rgb(151, 151, 151);
+	width: 7.5em;
+	height: 7.5em;
+	animation: spinner 1.25s linear infinite;
+	z-index: 1;
+	position: absolute;
+	bottom: calc(50% - 3.75em);
+}
+
+@keyframes spinner {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
 }

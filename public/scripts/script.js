@@ -2,6 +2,7 @@ mapboxgl.accessToken =
 	'pk.eyJ1Ijoic2FtY2xhcmtiIiwiYSI6ImNsM3NsMTIwNzAwdWUzYnBjenFwZG1wbjkifQ.fFO4fbulANPhBtywbyszzA'
 
 let data
+const loading = document.querySelector('.loader')
 
 const succesLocation = position => {
 	let lat = position.coords.latitude
@@ -13,7 +14,7 @@ const succesLocation = position => {
 	})
 
 	setupMap([lat, long])
-	console.log(['lat ' + lat, 'long ' + long])
+	loading.style.display = 'none'
 
 	data = { lat, long }
 
@@ -35,8 +36,8 @@ const succesLocation = position => {
 					properties: {
 						title: `<img src='./images/chargingLogo.png'> Station:`,
 						provider: '<span> Provider: </span>' + data.operatorName,
-						availability: '<span> Availabilty: </span>' + data.status,
-						emission: '<span> Emission: </span>' + data.sustain,
+						availability: '\n<span> Availabilty: </span>' + data.status,
+						emission: '\n<span> Emission: </span>' + data.sustain,
 						// operator: data.operatorName,
 						// sustainability: 'Gram CO2 uitstoot met kWh: ' + data.sustain,
 					},
