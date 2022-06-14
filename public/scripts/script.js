@@ -25,7 +25,6 @@ const succesLocation = position => {
 	fetch('/', options)
 		.then(response => response.json())
 		.then(data => {
-			console.log(data)
 			data.forEach(data => {
 				let dataForMap = {
 					type: data.markerType,
@@ -53,16 +52,20 @@ const succesLocation = position => {
 			// add markers to map
 			geojson.features.forEach(element => {
 				// create a HTML element for each feature
-				const charger = document.createElement('div')
-				data.forEach(data => {
-					if (data.maxPower >= 20) {
+
+				let charger = document.createElement('div')
+				if (data.length > 0) {
+					if (
+						data[0].status == 'Occupied' ||
+						data[0].status == 'Unavailable' ||
+						data[0].status == 'Unknown'
+					) {
 						charger.classList.add('occupied')
-					} else if (data.maxPower < 19) {
+					} else if (data[0].status == 'Available') {
 						charger.classList.add('marker')
 					}
-				})
-
-				// charger.classList.add('occupied')
+				}
+				data.shift() // removes the first object out of an array
 
 				// make a marker for each feature and add to the map
 				const marker = new mapboxgl.Marker(charger, {
