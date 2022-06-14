@@ -163,9 +163,10 @@ input[type='text']:focus {
 .mapboxgl-popup-content {
 	text-align: center;
 	color: white;
-	background-color: rgba(59, 137, 129, 0.95);
-	font-size: 1.4em !important;
+	background-color: rgba(6, 15, 81, 100);
+	font-size: 1.4em;
 	line-height: 25px;
+	border-radius: 0.5em;
 }
 
 .mapboxgl-popup-content h3 {
@@ -174,12 +175,22 @@ input[type='text']:focus {
 
 .mapboxgl-popup-close-button {
 	color: white;
-	font-size: 1em;
+	outline: none;
+	font-size: 1.25em;
+	transform: translate(-0.5em, 0.25em);
 }
 
-.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
-	background-color: rgba(59, 137, 129, 0.9);
-	color: rgba(59, 137, 129, 0.9);
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip,
+.mapboxgl-popup-anchor-top .mapboxgl-popup-tip,
+.mapboxgl-popup-anchor-right .mapboxgl-popup-tip,
+.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
+	border-top-color: rgba(6, 15, 81, 100);
+}
+
+.mapboxgl-ctrl-logo,
+.mapboxgl-ctrl-attrib-inner,
+.mapboxgl-ctrl-attrib.mapboxgl-compact {
+	display: none;
 }
 
 .occupied {

@@ -15,11 +15,11 @@ app.get('/', async (req, res) => {
 })
 
 app.post('/', async (req, res) => {
-	// let lat = req.body.lat
-	// let long = req.body.long
+	let lat = req.body.lat
+	let long = req.body.long
 
-	let long = 4.911941
-	let lat = 52.351961
+	// let long = 4.911941
+	// let lat = 52.351961
 
 	console.log(lat)
 	console.log(long)
