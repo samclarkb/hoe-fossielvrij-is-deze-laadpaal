@@ -77,9 +77,8 @@ input[type='text']:focus {
 
 .popup h2 {
 	color: white;
-	width: 100%;
+
 	margin: 0.75em 0;
-	padding-left: 2.5em;
 }
 
 .popup {
@@ -91,24 +90,25 @@ input[type='text']:focus {
 	height: 60vh;
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	flex-direction: column;
-	/* box-shadow: 0.3em 0.3em rgba(0, 0, 0, 0.25); */
+	font-weight: 200;
 	position: relative;
 }
 
 .popup button {
 	position: absolute;
-	background-color: rgba(6, 15, 81, 100);
+	background-color: transparent;
 	color: white;
+	font-weight: 900;
 	right: 0;
 	top: 0;
 	transform: translate(1.5em, -1.5em);
+	outline: none;
 	border: none;
 	font-size: 1.5em;
 	width: 1.5em;
 	height: 1.5em;
-	border-radius: 50%;
-	/* box-shadow: 0.15em 0.1em rgba(0, 0, 0, 0.25); */
 }
 
 .popup section {
@@ -131,7 +131,7 @@ input[type='text']:focus {
 .popup section:nth-of-type(3) {
 	padding-bottom: 1.5em;
 	margin-bottom: 1em;
-	border-bottom: solid 0.1em rgba(250, 250, 250, 1);
+	border-bottom: solid 0.05em rgba(250, 250, 250, 1);
 }
 
 .mapboxgl-ctrl-group > button {
@@ -252,4 +252,12 @@ input[type='text']:focus {
 	100% {
 		transform: rotate(360deg);
 	}
+}
+
+.mapboxgl-control-container input {
+	transform: translate(1.5em, -2.6em);
+}
+
+.mapboxgl-ctrl-geocoder {
+	height: 2.5em;
 }

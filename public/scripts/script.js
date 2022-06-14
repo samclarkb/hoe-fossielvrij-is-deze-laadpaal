@@ -132,6 +132,13 @@ const setupMap = () => {
 	)
 }
 
+map.addControl(
+	new MapboxGeocoder({
+		accessToken: mapboxgl.accessToken,
+		mapboxgl: mapboxgl,
+	})
+)
+
 const close = document.getElementById('close')
 const open = document.getElementById('open')
 const popup = document.getElementById('popup-container')
