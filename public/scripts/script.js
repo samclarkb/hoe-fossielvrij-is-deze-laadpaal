@@ -54,7 +54,15 @@ const succesLocation = position => {
 			geojson.features.forEach(element => {
 				// create a HTML element for each feature
 				const charger = document.createElement('div')
-				charger.classList.add('marker')
+				data.forEach(data => {
+					if (data.maxPower >= 20) {
+						charger.classList.add('occupied')
+					} else if (data.maxPower < 19) {
+						charger.classList.add('marker')
+					}
+				})
+
+				// charger.classList.add('occupied')
 
 				// make a marker for each feature and add to the map
 				const marker = new mapboxgl.Marker(charger, {

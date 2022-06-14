@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg11878"
+   inkscape:export-filename="/Users/samclarkboot/Documents/MINOR Web Development/Meesterproef/hoe-fossielvrij-is-deze-laadpaal/public/images/chargingGrey.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   inkscape:version="1.1.2 (b8e25be8, 2022-02-05)"
+   sodipodi:docname="chargingGrey.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview11880"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.60488917"
+     inkscape:cx="397.5935"
+     inkscape:cy="561.25984"
+     inkscape:window-width="1404"
+     inkscape:window-height="855"
+     inkscape:window-x="0"
+     inkscape:window-y="23"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs11875" />
+  <g
+     inkscape:label="Laag 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g6259"
+       transform="translate(-27.770806,-42.784638)"
+       style="fill:#cccccc">
+      <rect
+         style="fill:#cccccc;fill-rule:evenodd;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none"
+         id="rect9273"
+         width="77.921997"
+         height="151.99687"
+         x="59.339962"
+         y="108.96259" />
+    </g>
+    <path
+       fill="#000"
+       d="M 180.66771,97.270036 V 77.330401 c -0.0699,-3.59344 -3.00701,-6.47169 -6.6025,-6.47069 -3.71874,0.0499 -6.68441,3.12429 -6.62237,6.84551 0.001,0.14967 0.01,0.29946 0.0197,0.39927 v 32.352519 c 0,7.2932 5.9119,13.20541 13.20506,13.20541 v 72.62808 c 0,3.64836 -2.95661,6.60247 -6.60251,6.60247 -3.64585,0 -6.60255,-2.95462 -6.60255,-6.60247 v -26.41033 c 0,-10.93907 -8.86854,-19.80789 -19.80764,-19.80789 H 127.84729 V 70.841721 c 0,-7.2932 -5.9119,-13.20493 -13.20506,-13.20493 H 35.411771 c -7.2932,0 -13.20512,5.91173 -13.20512,13.20493 V 216.0979 c 0,7.29321 5.91192,13.20493 13.20512,13.20493 h 79.230549 c 7.29316,0 13.20509,-5.91172 13.20509,-13.20493 v -52.8202 h 19.80764 c 3.64585,0 6.60255,2.95462 6.60255,6.60247 v 26.41033 c 0,10.93907 8.86854,19.8074 19.80764,19.8074 10.93911,0 19.80764,-8.86833 19.80764,-19.8074 v -85.83349 c 0,-7.29322 -5.91192,-13.204924 -13.20514,-13.204924 z m -76.58421,44.890664 -34.341149,45.78754 -0.21461,-0.0998 c -0.61388,1.03812 -1.54119,1.85161 -2.83383,1.85161 -1.94895,0 -3.52857,-1.57711 -3.52857,-3.52855 0,-0.34938 0.28448,-0.6089 0.39428,-0.94827 l -0.23457,-0.0998 10.2551,-30.69504 c 0.7132,-2.13611 -0.87689,-4.34208 -3.1283,-4.34208 h -21.83992 c -2.71755,0 -4.26772,-3.10433 -2.63819,-5.27538 l 34.341145,-45.787024 0.2146,0.0998 c 0.61387,-1.03813 1.54119,-1.85165 2.83382,-1.85165 1.94895,0 3.52857,1.57714 3.52857,3.528604 0,0.34935 -0.28449,0.61388 -0.39427,0.94825 l 0.23457,0.0998 -10.252415,30.69406 c -0.7142,2.13611 0.87541,4.34208 3.1268,4.34208 h 21.839909 c 2.71754,0 4.26771,3.10433 2.63817,5.27538 z"
+       id="path828-7-2"
+       style="fill:#b3b3b3;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  </g>
+</svg>

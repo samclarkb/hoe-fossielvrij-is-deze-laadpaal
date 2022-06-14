@@ -151,7 +151,7 @@ input[type='text']:focus {
 	background-image: url('/images/chargingGreen.svg');
 	background-size: cover;
 	width: 2.5em;
-	height: 3.5em;
+	height: 3em;
 	cursor: pointer;
 }
 
@@ -180,4 +180,12 @@ input[type='text']:focus {
 .mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
 	background-color: rgba(59, 137, 129, 0.9);
 	color: rgba(59, 137, 129, 0.9);
+}
+
+.occupied {
+	background-image: url('/images/chargingGrey.svg');
+	background-size: cover;
+	width: 2.5em;
+	height: 3em;
+	cursor: pointer;
 }
