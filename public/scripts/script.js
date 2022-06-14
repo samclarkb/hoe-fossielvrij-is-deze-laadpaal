@@ -33,16 +33,12 @@ const succesLocation = position => {
 						coordinates: [data.coordinates.longitude, data.coordinates.latitude],
 					},
 					properties: {
-						title: 'Laadpaal',
-						description:
-							'Leverancier: ' +
-							data.operatorName +
-							'\nBeschikbaarheid: ' +
-							data.status +
-							'\nUitstoot: ' +
-							data.sustain,
-						operator: data.operatorName,
-						sustainability: 'Gram CO2 uitstoot met kWh: ' + data.sustain,
+						title: `<img src='./images/chargingLogo.png'> Station:`,
+						provider: '<span> Provider: </span>' + data.operatorName,
+						availability: '<span> Availabilty: </span>' + data.status,
+						emission: '<span> Emission: </span>' + data.sustain,
+						// operator: data.operatorName,
+						// sustainability: 'Gram CO2 uitstoot met kWh: ' + data.sustain,
 					},
 				}
 				geojson.features.push(dataForMap)
@@ -77,7 +73,7 @@ const succesLocation = position => {
 							offset: 25,
 						}) // add popups
 							.setHTML(
-								`<h3>${element.properties.title}</h3><p>${element.properties.description}</p>`
+								`<h3>${element.properties.title}</h3><p>${element.properties.provider}</p><p>${element.properties.availability}</p><p>${element.properties.emission}</p>`
 							)
 					)
 					.addTo(map)
