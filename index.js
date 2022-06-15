@@ -18,22 +18,13 @@ app.post('/', async (req, res) => {
 	let lat = req.body.lat
 	let long = req.body.long
 
-	// let long = 4.911941
-	// let lat = 52.351961
-
-	console.log(lat)
-	console.log(long)
-
 	try {
 		const url = `https://ui-map.shellrecharge.com/api/map/v2/markers/${long - 0.02}/${
 			long + 0.02
 		}/${lat - 0.02}/${lat + 0.02}/15`
 
-		console.log(url)
-
 		const response = await fetch(url)
 
-		console.log(response)
 		const data = await response.json()
 
 		res.json(data)
