@@ -55,8 +55,16 @@ const succesLocation = position => {
 						data[0].status == 'Unknown'
 					) {
 						charger.classList.add('occupied')
-					} else if (data[0].status == 'Available') {
+					} else if (data[0].status == 'Available' && data[0].sustain <= 125) {
 						charger.classList.add('marker')
+					} else if (
+						data[0].status == 'Available' &&
+						data[0].sustain > 125 &&
+						data[0].sustain <= 285
+					) {
+						charger.classList.add('markerOrange')
+					} else if (data[0].status == 'Available' && data[0].sustain >= 286) {
+						charger.classList.add('markerRed')
 					}
 				}
 				data.shift() // removes the first object out of an array
@@ -112,13 +120,12 @@ map.addControl(geocoder)
 geocoder.on('result', event => {
 	const long = event.result.center[0]
 	const lat = event.result.center[1]
+	const data = { long, lat }
 
 	map.flyTo({
 		center: [long, lat],
 		speed: 1,
 	})
-
-	const data = { long, lat }
 
 	const options = {
 		method: 'POST',
@@ -157,8 +164,16 @@ geocoder.on('result', event => {
 						data[0].status == 'Unknown'
 					) {
 						charger.classList.add('occupied')
-					} else if (data[0].status == 'Available') {
+					} else if (data[0].status == 'Available' && data[0].sustain <= 125) {
 						charger.classList.add('marker')
+					} else if (
+						data[0].status == 'Available' &&
+						data[0].sustain > 125 &&
+						data[0].sustain < 250
+					) {
+						charger.classList.add('markerOrange')
+					} else if (data[0].status == 'Available' && data[0].sustain >= 250) {
+						charger.classList.add('markerRed')
 					}
 				}
 				data.shift() // removes the first object out of an array

@@ -155,9 +155,25 @@ input[type='text']:focus {
 	cursor: pointer;
 }
 
+.markerOrange {
+	background-image: url('/images/chargingOrange.svg');
+	background-size: cover;
+	width: 2.5em;
+	height: 3em;
+	cursor: pointer;
+}
+
+.markerRed {
+	background-image: url('/images/chargingRed.svg');
+	background-size: cover;
+	width: 2.5em;
+	height: 3em;
+	cursor: pointer;
+}
+
 .mapboxgl-popup {
 	max-width: 20vw;
-	max-height: 30vh;
+	/* max-height: 30vh; */
 }
 
 .mapboxgl-popup-content {
