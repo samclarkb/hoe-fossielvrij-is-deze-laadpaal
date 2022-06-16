@@ -169,10 +169,12 @@ geocoder.on('result', event => {
 					} else if (
 						data[0].status == 'Available' &&
 						data[0].sustain > 125 &&
-						data[0].sustain < 250
+						data[0].sustain <= 285
 					) {
+						console.log(data[0].sustain)
 						charger.classList.add('markerOrange')
-					} else if (data[0].status == 'Available' && data[0].sustain >= 250) {
+					} else if (data[0].status == 'Available' && data[0].sustain >= 286) {
+						// console.log(data[0].sustain)
 						charger.classList.add('markerRed')
 					}
 				}
