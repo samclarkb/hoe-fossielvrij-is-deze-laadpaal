@@ -21,24 +21,27 @@ app.use(express.static(__dirname + '/public'))
 app.use(express.json()) // Makes it possible to parse JSON
 
 app.get('/', async (req, res) => {
+	res.render('landing')
+})
+
+app.get('/home', async (req, res) => {
 	res.render('home')
 })
 
-app.post('/', async (req, res) => {
+app.post('/home', async (req, res) => {
 	let lat = req.body.lat
 	let long = req.body.long
 
 	try {
 		const url = `https://ui-map.shellrecharge.com/api/map/v2/markers/${long - 0.02}/${
 			long + 0.02
-		}/${lat - 0.02}/${lat + 0.02}/15`
+		}/${lat - 0.015}/${lat + 0.015}/15` // /15 defines the zoom
 
 		const response = await fetch(url)
 		const data = await response.json()
 		let SUSTAINDATA = []
 
 		const energySuppliers = await getData()
-		// console.log(energySuppliers)
 		Object.entries(energySuppliers).map(supplier => {
 			dataObject = {
 				name: supplier[1][0],

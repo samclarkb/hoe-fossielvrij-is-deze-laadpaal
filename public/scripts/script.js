@@ -1,8 +1,9 @@
 mapboxgl.accessToken =
 	'pk.eyJ1Ijoic2FtY2xhcmtiIiwiYSI6ImNsM3NsMTIwNzAwdWUzYnBjenFwZG1wbjkifQ.fFO4fbulANPhBtywbyszzA'
 
-let data
 const loading = document.querySelector('.loader')
+let data
+let average
 
 const succesLocation = position => {
 	let lat = position.coords.latitude
@@ -23,7 +24,7 @@ const succesLocation = position => {
 		headers: { 'Content-type': 'application/json' },
 		body: JSON.stringify(data),
 	}
-	fetch('/', options)
+	fetch('/home', options)
 		.then(response => response.json())
 		.then(data => {
 			data.forEach(data => {
@@ -43,6 +44,21 @@ const succesLocation = position => {
 				geojson.features.push(stationData)
 			})
 
+			const calculateAverage = data => {
+				average = 0
+				let sum = 0
+
+				for (let i = 0; i < data.length; i++) {
+					if (isFinite(data[i].sustain)) {
+						sum += data[i].sustain
+					}
+				}
+				return sum / 29
+			}
+			average = calculateAverage(data) // we need to calculate the average to make a scale for the loading points
+			console.log(data.length)
+			console.log(average)
+
 			// add markers to map
 			geojson.features.forEach(element => {
 				// create a HTML element for each feature
@@ -55,15 +71,43 @@ const succesLocation = position => {
 						data[0].status == 'Unknown'
 					) {
 						charger.classList.add('occupied')
-					} else if (data[0].status == 'Available' && data[0].sustain <= 125) {
+					} else if (
+						data[0].status == 'Available' &&
+						data[0].sustain <= 125 &&
+						data[0].sustain <= average
+					) {
 						charger.classList.add('marker')
 					} else if (
 						data[0].status == 'Available' &&
-						data[0].sustain > 125 &&
-						data[0].sustain <= 285
+						data[0].sustain <= 125 &&
+						data[0].sustain > average
 					) {
-						charger.classList.add('markerOrange')
-					} else if (data[0].status == 'Available' && data[0].sustain >= 286) {
+						charger.classList.add('markerGreenButWorse')
+					} else if (
+						data[0].status == 'Available' &&
+						data[0].sustain > 125 &&
+						data[0].sustain <= 285 &&
+						data[0].sustain <= average
+					) {
+						charger.classList.add('markerOrangeButBest')
+					} else if (
+						data[0].status == 'Available' &&
+						data[0].sustain > 125 &&
+						data[0].sustain <= 285 &&
+						data[0].sustain > average
+					) {
+						charger.classList.add('markerOrangeButWorse')
+					} else if (
+						data[0].status == 'Available' &&
+						data[0].sustain >= 286 &&
+						data[0].sustain <= average
+					) {
+						charger.classList.add('markerRedButBest')
+					} else if (
+						data[0].status == 'Available' &&
+						data[0].sustain >= 286 &&
+						data[0].sustain > average
+					) {
 						charger.classList.add('markerRed')
 					}
 				}
@@ -132,7 +176,7 @@ geocoder.on('result', event => {
 		headers: { 'Content-type': 'application/json' },
 		body: JSON.stringify(data),
 	}
-	fetch('/', options)
+	fetch('/home', options)
 		.then(response => response.json())
 		.then(data => {
 			data.forEach(data => {
@@ -164,17 +208,43 @@ geocoder.on('result', event => {
 						data[0].status == 'Unknown'
 					) {
 						charger.classList.add('occupied')
-					} else if (data[0].status == 'Available' && data[0].sustain <= 125) {
+					} else if (
+						data[0].status == 'Available' &&
+						data[0].sustain <= 125 &&
+						data[0].sustain <= average
+					) {
 						charger.classList.add('marker')
 					} else if (
 						data[0].status == 'Available' &&
-						data[0].sustain > 125 &&
-						data[0].sustain <= 285
+						data[0].sustain <= 125 &&
+						data[0].sustain > average
 					) {
-						console.log(data[0].sustain)
-						charger.classList.add('markerOrange')
-					} else if (data[0].status == 'Available' && data[0].sustain >= 286) {
-						// console.log(data[0].sustain)
+						charger.classList.add('markerGreenButWorse')
+					} else if (
+						data[0].status == 'Available' &&
+						data[0].sustain > 125 &&
+						data[0].sustain <= 285 &&
+						data[0].sustain <= average
+					) {
+						charger.classList.add('markerOrangeButBest')
+					} else if (
+						data[0].status == 'Available' &&
+						data[0].sustain > 125 &&
+						data[0].sustain <= 285 &&
+						data[0].sustain > average
+					) {
+						charger.classList.add('markerOrangeButWorse')
+					} else if (
+						data[0].status == 'Available' &&
+						data[0].sustain >= 286 &&
+						data[0].sustain <= average
+					) {
+						charger.classList.add('markerRedButBest')
+					} else if (
+						data[0].status == 'Available' &&
+						data[0].sustain >= 286 &&
+						data[0].sustain > average
+					) {
 						charger.classList.add('markerRed')
 					}
 				}
