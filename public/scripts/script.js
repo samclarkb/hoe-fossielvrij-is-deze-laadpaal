@@ -36,10 +36,11 @@ const succesLocation = position => {
 					},
 					properties: {
 						title: `Station:`,
-						warning: `Sustainable charger!`,
+						warning: `This charger is sustainable!`,
 						provider: `<span> Provider: </span>` + data.operatorName,
 						availability: '<span> Availabilty: </span>' + data.status,
-						emission: '<span> Emission: </span>' + data.sustain + ' gr CO2 by KWH',
+						emission:
+							'<span> Emission: </span>' + parseInt(data.sustain) + ' gr CO2 by KWH',
 					},
 				}
 
@@ -51,10 +52,11 @@ const succesLocation = position => {
 					},
 					properties: {
 						title: `Station:`,
-						warning: `Quite sustainable charger`,
+						warning: `This charger is quite sustainable`,
 						provider: '<span> Provider: </span>' + data.operatorName,
 						availability: '<span> Availabilty: </span>' + data.status,
-						emission: '<span> Emission: </span>' + data.sustain + ' gr CO2 by KWH',
+						emission:
+							'<span> Emission: </span>' + parseInt(data.sustain) + ' gr CO2 by KWH', //parseInt removes all the point decimal numbers
 					},
 				}
 
@@ -66,10 +68,11 @@ const succesLocation = position => {
 					},
 					properties: {
 						title: `Station:`,
-						warning: `<span>Warning: </span>unsustainable charger!`,
+						warning: `<span>Warning: </span> This charger is unsustainable!`,
 						provider: '<span> Provider: </span>' + data.operatorName,
 						availability: '<span> Availabilty: </span>' + data.status,
-						emission: '<span> Emission: </span>' + data.sustain + ' gr CO2 by KWH',
+						emission:
+							'<span> Emission: </span>' + parseInt(data.sustain) + ' gr CO2 by KWH',
 					},
 				}
 
@@ -129,7 +132,6 @@ const succesLocation = position => {
 						data[0].sustain <= average
 					) {
 						charger.classList.add('marker')
-						charger.classList.add('markerOrangeButBest')
 						const marker = new mapboxgl.Marker(charger, {
 							scale: 0.9,
 						})
@@ -149,7 +151,6 @@ const succesLocation = position => {
 						data[0].sustain > average
 					) {
 						charger.classList.add('markerGreenButWorse')
-						charger.classList.add('markerOrangeButBest')
 						const marker = new mapboxgl.Marker(charger, {
 							scale: 0.9,
 						})
@@ -190,7 +191,7 @@ const succesLocation = position => {
 						data[0].sustain > average
 					) {
 						charger.classList.add('markerOrangeButWorse')
-						charger.classList.add('markerOrangeButBest')
+
 						const marker = new mapboxgl.Marker(charger, {
 							scale: 0.9,
 						})
@@ -210,7 +211,7 @@ const succesLocation = position => {
 						data[0].sustain <= average
 					) {
 						charger.classList.add('markerRedButBest')
-						charger.classList.add('markerOrangeButBest')
+
 						const marker = new mapboxgl.Marker(charger, {
 							scale: 0.9,
 						})
@@ -230,7 +231,7 @@ const succesLocation = position => {
 						data[0].sustain > average
 					) {
 						charger.classList.add('markerRed')
-						charger.classList.add('markerOrangeButBest')
+
 						const marker = new mapboxgl.Marker(charger, {
 							scale: 0.9,
 						})
@@ -308,10 +309,11 @@ geocoder.on('result', event => {
 					},
 					properties: {
 						title: `Station:`,
-						warning: `Sustainable charger!`,
+						warning: `This charger is sustainable!`,
 						provider: `<span> Provider: </span>` + data.operatorName,
 						availability: '<span> Availabilty: </span>' + data.status,
-						emission: '<span> Emission: </span>' + data.sustain + ' gr CO2 by KWH',
+						emission:
+							'<span> Emission: </span>' + parseInt(data.sustain) + ' gr CO2 by KWH',
 					},
 				}
 
@@ -323,10 +325,11 @@ geocoder.on('result', event => {
 					},
 					properties: {
 						title: `Station:`,
-						warning: `Quite sustainable charger`,
+						warning: `This charger is quiet sustainable`,
 						provider: '<span> Provider: </span>' + data.operatorName,
 						availability: '<span> Availabilty: </span>' + data.status,
-						emission: '<span> Emission: </span>' + data.sustain + ' gr CO2 by KWH',
+						emission:
+							'<span> Emission: </span>' + parseInt(data.sustain) + ' gr CO2 by KWH',
 					},
 				}
 
@@ -338,10 +341,11 @@ geocoder.on('result', event => {
 					},
 					properties: {
 						title: `Station:`,
-						warning: `<span>Warning: </span>unsustainable charger!`,
+						warning: `<span>Warning: </span> This charger is unsustainable!`,
 						provider: '<span> Provider: </span>' + data.operatorName,
 						availability: '<span> Availabilty: </span>' + data.status,
-						emission: '<span> Emission: </span>' + data.sustain + ' gr CO2 by KWH',
+						emission:
+							'<span> Emission: </span>' + parseInt(data.sustain) + ' gr CO2 by KWH',
 					},
 				}
 
@@ -363,7 +367,7 @@ geocoder.on('result', event => {
 						sum += data[i].sustain
 					}
 				}
-				return sum / 29
+				return sum / data.length
 			}
 			average = calculateAverage(data) // we need to calculate the average to make a scale for the loading points
 			console.log(data.length)
@@ -381,7 +385,7 @@ geocoder.on('result', event => {
 						data[0].status == 'Unknown'
 					) {
 						charger.classList.add('occupied')
-						charger.classList.add('markerOrangeButBest')
+
 						const marker = new mapboxgl.Marker(charger, {
 							scale: 0.9,
 						})
@@ -401,7 +405,7 @@ geocoder.on('result', event => {
 						data[0].sustain <= average
 					) {
 						charger.classList.add('marker')
-						charger.classList.add('markerOrangeButBest')
+
 						const marker = new mapboxgl.Marker(charger, {
 							scale: 0.9,
 						})
@@ -421,7 +425,7 @@ geocoder.on('result', event => {
 						data[0].sustain > average
 					) {
 						charger.classList.add('markerGreenButWorse')
-						charger.classList.add('markerOrangeButBest')
+
 						const marker = new mapboxgl.Marker(charger, {
 							scale: 0.9,
 						})
@@ -462,7 +466,7 @@ geocoder.on('result', event => {
 						data[0].sustain > average
 					) {
 						charger.classList.add('markerOrangeButWorse')
-						charger.classList.add('markerOrangeButBest')
+
 						const marker = new mapboxgl.Marker(charger, {
 							scale: 0.9,
 						})
@@ -482,7 +486,7 @@ geocoder.on('result', event => {
 						data[0].sustain <= average
 					) {
 						charger.classList.add('markerRedButBest')
-						charger.classList.add('markerOrangeButBest')
+
 						const marker = new mapboxgl.Marker(charger, {
 							scale: 0.9,
 						})
@@ -502,7 +506,7 @@ geocoder.on('result', event => {
 						data[0].sustain > average
 					) {
 						charger.classList.add('markerRed')
-						charger.classList.add('markerOrangeButBest')
+
 						const marker = new mapboxgl.Marker(charger, {
 							scale: 0.9,
 						})
