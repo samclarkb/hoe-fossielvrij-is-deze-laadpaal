@@ -35,13 +35,51 @@ const succesLocation = position => {
 						coordinates: [data.coordinates.longitude, data.coordinates.latitude],
 					},
 					properties: {
-						title: `<img src='./images/chargingLogo.png'> Station:`,
-						provider: '<span> Provider: </span>' + data.operatorName,
+						title: `Station:`,
+						warning: `Sustainable charger!`,
+						provider: `<span> Provider: </span>` + data.operatorName,
 						availability: '<span> Availabilty: </span>' + data.status,
-						emission: '<span> Emission: </span>' + data.sustain,
+						emission: '<span> Emission: </span>' + data.sustain + ' gr CO2 by KWH',
 					},
 				}
-				geojson.features.push(stationData)
+
+				let stationData2 = {
+					type: data.markerType,
+					geometry: {
+						type: 'Laadpunt',
+						coordinates: [data.coordinates.longitude, data.coordinates.latitude],
+					},
+					properties: {
+						title: `Station:`,
+						warning: `Quite sustainable charger`,
+						provider: '<span> Provider: </span>' + data.operatorName,
+						availability: '<span> Availabilty: </span>' + data.status,
+						emission: '<span> Emission: </span>' + data.sustain + ' gr CO2 by KWH',
+					},
+				}
+
+				let stationData3 = {
+					type: data.markerType,
+					geometry: {
+						type: 'Laadpunt',
+						coordinates: [data.coordinates.longitude, data.coordinates.latitude],
+					},
+					properties: {
+						title: `Station:`,
+						warning: `<span>Warning: </span>unsustainable charger!`,
+						provider: '<span> Provider: </span>' + data.operatorName,
+						availability: '<span> Availabilty: </span>' + data.status,
+						emission: '<span> Emission: </span>' + data.sustain + ' gr CO2 by KWH',
+					},
+				}
+
+				if (data.sustain < 125) {
+					geojson.features.push(stationData)
+				} else if (data.sustain >= 125 && data.sustain <= 285) {
+					geojson.features.push(stationData2)
+				} else if (data.sustain >= 285) {
+					geojson.features.push(stationData3)
+				}
 			})
 
 			const calculateAverage = data => {
@@ -71,18 +109,60 @@ const succesLocation = position => {
 						data[0].status == 'Unknown'
 					) {
 						charger.classList.add('occupied')
+						charger.classList.add('markerOrangeButBest')
+						const marker = new mapboxgl.Marker(charger, {
+							scale: 0.9,
+						})
+							.setLngLat(element.geometry.coordinates)
+							.setPopup(
+								new mapboxgl.Popup({
+									offset: 25,
+								}) // add popups
+									.setHTML(
+										`<h3>${element.properties.title}</h3><p>${element.properties.provider}</p><p>${element.properties.availability}</p><p>${element.properties.emission}</p>`
+									)
+							)
+							.addTo(map)
 					} else if (
 						data[0].status == 'Available' &&
 						data[0].sustain <= 125 &&
 						data[0].sustain <= average
 					) {
 						charger.classList.add('marker')
+						charger.classList.add('markerOrangeButBest')
+						const marker = new mapboxgl.Marker(charger, {
+							scale: 0.9,
+						})
+							.setLngLat(element.geometry.coordinates)
+							.setPopup(
+								new mapboxgl.Popup({
+									offset: 25,
+								}) // add popups
+									.setHTML(
+										`<h3>${element.properties.title}</h3><h4>${element.properties.warning}</h4><p>${element.properties.provider}</p><p>${element.properties.availability}</p><p>${element.properties.emission}</p>`
+									)
+							)
+							.addTo(map)
 					} else if (
 						data[0].status == 'Available' &&
 						data[0].sustain <= 125 &&
 						data[0].sustain > average
 					) {
 						charger.classList.add('markerGreenButWorse')
+						charger.classList.add('markerOrangeButBest')
+						const marker = new mapboxgl.Marker(charger, {
+							scale: 0.9,
+						})
+							.setLngLat(element.geometry.coordinates)
+							.setPopup(
+								new mapboxgl.Popup({
+									offset: 25,
+								}) // add popups
+									.setHTML(
+										`<h3>${element.properties.title}</h3><h4>${element.properties.warning}</h4><p>${element.properties.provider}</p><p>${element.properties.availability}</p><p>${element.properties.emission}</p>`
+									)
+							)
+							.addTo(map)
 					} else if (
 						data[0].status == 'Available' &&
 						data[0].sustain > 125 &&
@@ -90,6 +170,19 @@ const succesLocation = position => {
 						data[0].sustain <= average
 					) {
 						charger.classList.add('markerOrangeButBest')
+						const marker = new mapboxgl.Marker(charger, {
+							scale: 0.9,
+						})
+							.setLngLat(element.geometry.coordinates)
+							.setPopup(
+								new mapboxgl.Popup({
+									offset: 25,
+								}) // add popups
+									.setHTML(
+										`<h3>${element.properties.title}</h3><h5>${element.properties.warning}</h5><p>${element.properties.provider}</p><p>${element.properties.availability}</p><p>${element.properties.emission}</p>`
+									)
+							)
+							.addTo(map)
 					} else if (
 						data[0].status == 'Available' &&
 						data[0].sustain > 125 &&
@@ -97,36 +190,63 @@ const succesLocation = position => {
 						data[0].sustain > average
 					) {
 						charger.classList.add('markerOrangeButWorse')
+						charger.classList.add('markerOrangeButBest')
+						const marker = new mapboxgl.Marker(charger, {
+							scale: 0.9,
+						})
+							.setLngLat(element.geometry.coordinates)
+							.setPopup(
+								new mapboxgl.Popup({
+									offset: 25,
+								}) // add popups
+									.setHTML(
+										`<h3>${element.properties.title}</h3><h5>${element.properties.warning}</h5><p>${element.properties.provider}</p><p>${element.properties.availability}</p><p>${element.properties.emission}</p>`
+									)
+							)
+							.addTo(map)
 					} else if (
 						data[0].status == 'Available' &&
-						data[0].sustain >= 286 &&
+						data[0].sustain > 285 &&
 						data[0].sustain <= average
 					) {
 						charger.classList.add('markerRedButBest')
+						charger.classList.add('markerOrangeButBest')
+						const marker = new mapboxgl.Marker(charger, {
+							scale: 0.9,
+						})
+							.setLngLat(element.geometry.coordinates)
+							.setPopup(
+								new mapboxgl.Popup({
+									offset: 25,
+								}) // add popups
+									.setHTML(
+										`<h3>${element.properties.title}</h3><h6>${element.properties.warning}</h6><p>${element.properties.provider}</p><p>${element.properties.availability}</p><p>${element.properties.emission}</p>`
+									)
+							)
+							.addTo(map)
 					} else if (
 						data[0].status == 'Available' &&
-						data[0].sustain >= 286 &&
+						data[0].sustain > 285 &&
 						data[0].sustain > average
 					) {
 						charger.classList.add('markerRed')
+						charger.classList.add('markerOrangeButBest')
+						const marker = new mapboxgl.Marker(charger, {
+							scale: 0.9,
+						})
+							.setLngLat(element.geometry.coordinates)
+							.setPopup(
+								new mapboxgl.Popup({
+									offset: 25,
+								}) // add popups
+									.setHTML(
+										`<h3>${element.properties.title}</h3><h6>${element.properties.warning}</h6><p>${element.properties.provider}</p><p>${element.properties.availability}</p><p>${element.properties.emission}</p>`
+									)
+							)
+							.addTo(map)
 					}
 				}
 				data.shift() // removes the first object out of an array
-
-				// make a marker for each feature and add to the map
-				const marker = new mapboxgl.Marker(charger, {
-					scale: 0.9,
-				})
-					.setLngLat(element.geometry.coordinates)
-					.setPopup(
-						new mapboxgl.Popup({
-							offset: 25,
-						}) // add popups
-							.setHTML(
-								`<h3>${element.properties.title}</h3><p>${element.properties.provider}</p><p>${element.properties.availability}</p><p>${element.properties.emission}</p>`
-							)
-					)
-					.addTo(map)
 			})
 		})
 		.catch(error => {
@@ -187,14 +307,67 @@ geocoder.on('result', event => {
 						coordinates: [data.coordinates.longitude, data.coordinates.latitude],
 					},
 					properties: {
-						title: `<img src='./images/chargingLogo.png'> Station:`,
-						provider: '<span> Provider: </span>' + data.operatorName,
+						title: `Station:`,
+						warning: `Sustainable charger!`,
+						provider: `<span> Provider: </span>` + data.operatorName,
 						availability: '<span> Availabilty: </span>' + data.status,
-						emission: '<span> Emission: </span>' + data.sustain,
+						emission: '<span> Emission: </span>' + data.sustain + ' gr CO2 by KWH',
 					},
 				}
-				geojson.features.push(stationData)
+
+				let stationData2 = {
+					type: data.markerType,
+					geometry: {
+						type: 'Laadpunt',
+						coordinates: [data.coordinates.longitude, data.coordinates.latitude],
+					},
+					properties: {
+						title: `Station:`,
+						warning: `Quite sustainable charger`,
+						provider: '<span> Provider: </span>' + data.operatorName,
+						availability: '<span> Availabilty: </span>' + data.status,
+						emission: '<span> Emission: </span>' + data.sustain + ' gr CO2 by KWH',
+					},
+				}
+
+				let stationData3 = {
+					type: data.markerType,
+					geometry: {
+						type: 'Laadpunt',
+						coordinates: [data.coordinates.longitude, data.coordinates.latitude],
+					},
+					properties: {
+						title: `Station:`,
+						warning: `<span>Warning: </span>unsustainable charger!`,
+						provider: '<span> Provider: </span>' + data.operatorName,
+						availability: '<span> Availabilty: </span>' + data.status,
+						emission: '<span> Emission: </span>' + data.sustain + ' gr CO2 by KWH',
+					},
+				}
+
+				if (data.sustain < 125) {
+					geojson.features.push(stationData)
+				} else if (data.sustain >= 125 && data.sustain < 285) {
+					geojson.features.push(stationData2)
+				} else if (data.sustain >= 285) {
+					geojson.features.push(stationData3)
+				}
 			})
+
+			const calculateAverage = data => {
+				average = 0
+				let sum = 0
+
+				for (let i = 0; i < data.length; i++) {
+					if (isFinite(data[i].sustain)) {
+						sum += data[i].sustain
+					}
+				}
+				return sum / 29
+			}
+			average = calculateAverage(data) // we need to calculate the average to make a scale for the loading points
+			console.log(data.length)
+			console.log(average)
 
 			// add markers to map
 			geojson.features.forEach(element => {
@@ -208,18 +381,60 @@ geocoder.on('result', event => {
 						data[0].status == 'Unknown'
 					) {
 						charger.classList.add('occupied')
+						charger.classList.add('markerOrangeButBest')
+						const marker = new mapboxgl.Marker(charger, {
+							scale: 0.9,
+						})
+							.setLngLat(element.geometry.coordinates)
+							.setPopup(
+								new mapboxgl.Popup({
+									offset: 25,
+								}) // add popups
+									.setHTML(
+										`<h3>${element.properties.title}</h3><p>${element.properties.provider}</p><p>${element.properties.availability}</p><p>${element.properties.emission}</p>`
+									)
+							)
+							.addTo(map)
 					} else if (
 						data[0].status == 'Available' &&
 						data[0].sustain <= 125 &&
 						data[0].sustain <= average
 					) {
 						charger.classList.add('marker')
+						charger.classList.add('markerOrangeButBest')
+						const marker = new mapboxgl.Marker(charger, {
+							scale: 0.9,
+						})
+							.setLngLat(element.geometry.coordinates)
+							.setPopup(
+								new mapboxgl.Popup({
+									offset: 25,
+								}) // add popups
+									.setHTML(
+										`<h3>${element.properties.title}</h3><h4>${element.properties.warning}</h4><p>${element.properties.provider}</p><p>${element.properties.availability}</p><p>${element.properties.emission}</p>`
+									)
+							)
+							.addTo(map)
 					} else if (
 						data[0].status == 'Available' &&
 						data[0].sustain <= 125 &&
 						data[0].sustain > average
 					) {
 						charger.classList.add('markerGreenButWorse')
+						charger.classList.add('markerOrangeButBest')
+						const marker = new mapboxgl.Marker(charger, {
+							scale: 0.9,
+						})
+							.setLngLat(element.geometry.coordinates)
+							.setPopup(
+								new mapboxgl.Popup({
+									offset: 25,
+								}) // add popups
+									.setHTML(
+										`<h3>${element.properties.title}</h3><h4>${element.properties.warning}</h4><p>${element.properties.provider}</p><p>${element.properties.availability}</p><p>${element.properties.emission}</p>`
+									)
+							)
+							.addTo(map)
 					} else if (
 						data[0].status == 'Available' &&
 						data[0].sustain > 125 &&
@@ -227,6 +442,19 @@ geocoder.on('result', event => {
 						data[0].sustain <= average
 					) {
 						charger.classList.add('markerOrangeButBest')
+						const marker = new mapboxgl.Marker(charger, {
+							scale: 0.9,
+						})
+							.setLngLat(element.geometry.coordinates)
+							.setPopup(
+								new mapboxgl.Popup({
+									offset: 25,
+								}) // add popups
+									.setHTML(
+										`<h3>${element.properties.title}</h3><h5>${element.properties.warning}</h5><p>${element.properties.provider}</p><p>${element.properties.availability}</p><p>${element.properties.emission}</p>`
+									)
+							)
+							.addTo(map)
 					} else if (
 						data[0].status == 'Available' &&
 						data[0].sustain > 125 &&
@@ -234,36 +462,63 @@ geocoder.on('result', event => {
 						data[0].sustain > average
 					) {
 						charger.classList.add('markerOrangeButWorse')
+						charger.classList.add('markerOrangeButBest')
+						const marker = new mapboxgl.Marker(charger, {
+							scale: 0.9,
+						})
+							.setLngLat(element.geometry.coordinates)
+							.setPopup(
+								new mapboxgl.Popup({
+									offset: 25,
+								}) // add popups
+									.setHTML(
+										`<h3>${element.properties.title}</h3><h5>${element.properties.warning}</h5><p>${element.properties.provider}</p><p>${element.properties.availability}</p><p>${element.properties.emission}</p>`
+									)
+							)
+							.addTo(map)
 					} else if (
 						data[0].status == 'Available' &&
 						data[0].sustain >= 286 &&
 						data[0].sustain <= average
 					) {
 						charger.classList.add('markerRedButBest')
+						charger.classList.add('markerOrangeButBest')
+						const marker = new mapboxgl.Marker(charger, {
+							scale: 0.9,
+						})
+							.setLngLat(element.geometry.coordinates)
+							.setPopup(
+								new mapboxgl.Popup({
+									offset: 25,
+								}) // add popups
+									.setHTML(
+										`<h3>${element.properties.title}</h3><h6>${element.properties.warning}</h6><p>${element.properties.provider}</p><p>${element.properties.availability}</p><p>${element.properties.emission}</p>`
+									)
+							)
+							.addTo(map)
 					} else if (
 						data[0].status == 'Available' &&
 						data[0].sustain >= 286 &&
 						data[0].sustain > average
 					) {
 						charger.classList.add('markerRed')
+						charger.classList.add('markerOrangeButBest')
+						const marker = new mapboxgl.Marker(charger, {
+							scale: 0.9,
+						})
+							.setLngLat(element.geometry.coordinates)
+							.setPopup(
+								new mapboxgl.Popup({
+									offset: 25,
+								}) // add popups
+									.setHTML(
+										`<h3>${element.properties.title}</h3><h6>${element.properties.warning}</h6><p>${element.properties.provider}</p><p>${element.properties.availability}</p><p>${element.properties.emission}</p>`
+									)
+							)
+							.addTo(map)
 					}
 				}
 				data.shift() // removes the first object out of an array
-
-				// make a marker for each feature and add to the map
-				const marker = new mapboxgl.Marker(charger, {
-					scale: 0.9,
-				})
-					.setLngLat(element.geometry.coordinates)
-					.setPopup(
-						new mapboxgl.Popup({
-							offset: 25,
-						}) // add popups
-							.setHTML(
-								`<h3>${element.properties.title}</h3><p>${element.properties.provider}</p><p>${element.properties.availability}</p><p>${element.properties.emission}</p>`
-							)
-					)
-					.addTo(map)
 			})
 		})
 		.catch(error => {
