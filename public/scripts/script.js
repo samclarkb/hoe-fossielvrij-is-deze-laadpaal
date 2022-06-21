@@ -80,7 +80,7 @@ const succesLocation = position => {
 					geojson.features.push(stationData)
 				} else if (data.sustain >= 125 && data.sustain <= 285) {
 					geojson.features.push(stationData2)
-				} else if (data.sustain >= 285) {
+				} else if (data.sustain > 285) {
 					geojson.features.push(stationData3)
 				}
 			})
@@ -89,15 +89,24 @@ const succesLocation = position => {
 				average = 0
 				let sum = 0
 
+				const newLength = data.filter(d => {
+					if ('sustain' in d) {
+						console.log(d)
+						return d
+					}
+				})
+
 				for (let i = 0; i < data.length; i++) {
 					if (isFinite(data[i].sustain)) {
 						sum += data[i].sustain
 					}
 				}
-				return sum / 29
+
+				return sum / newLength.length
 			}
 			average = calculateAverage(data) // we need to calculate the average to make a scale for the loading points
-			console.log(data.length)
+
+			console.log(data)
 			console.log(average)
 
 			// add markers to map
@@ -112,7 +121,6 @@ const succesLocation = position => {
 						data[0].status == 'Unknown'
 					) {
 						charger.classList.add('occupied')
-						charger.classList.add('markerOrangeButBest')
 						const marker = new mapboxgl.Marker(charger, {
 							scale: 0.9,
 						})
@@ -132,6 +140,7 @@ const succesLocation = position => {
 						data[0].sustain <= average
 					) {
 						charger.classList.add('marker')
+
 						const marker = new mapboxgl.Marker(charger, {
 							scale: 0.9,
 						})
@@ -151,6 +160,7 @@ const succesLocation = position => {
 						data[0].sustain > average
 					) {
 						charger.classList.add('markerGreenButWorse')
+
 						const marker = new mapboxgl.Marker(charger, {
 							scale: 0.9,
 						})
@@ -207,7 +217,7 @@ const succesLocation = position => {
 							.addTo(map)
 					} else if (
 						data[0].status == 'Available' &&
-						data[0].sustain > 285 &&
+						data[0].sustain >= 286 &&
 						data[0].sustain <= average
 					) {
 						charger.classList.add('markerRedButBest')
@@ -227,7 +237,7 @@ const succesLocation = position => {
 							.addTo(map)
 					} else if (
 						data[0].status == 'Available' &&
-						data[0].sustain > 285 &&
+						data[0].sustain >= 286 &&
 						data[0].sustain > average
 					) {
 						charger.classList.add('markerRed')
@@ -325,7 +335,7 @@ geocoder.on('result', event => {
 					},
 					properties: {
 						title: `Station:`,
-						warning: `This charger is quiet sustainable`,
+						warning: `This charger is quite sustainable`,
 						provider: '<span> Provider: </span>' + data.operatorName,
 						availability: '<span> Availabilty: </span>' + data.status,
 						emission:
@@ -362,14 +372,22 @@ geocoder.on('result', event => {
 				average = 0
 				let sum = 0
 
+				const newLength = data.filter(d => {
+					if ('sustain' in d) {
+						console.log(d)
+						return d
+					}
+				})
+
 				for (let i = 0; i < data.length; i++) {
 					if (isFinite(data[i].sustain)) {
 						sum += data[i].sustain
 					}
 				}
-				return sum / data.length
+				return sum / newLength.length
 			}
 			average = calculateAverage(data) // we need to calculate the average to make a scale for the loading points
+
 			console.log(data.length)
 			console.log(average)
 
@@ -385,7 +403,6 @@ geocoder.on('result', event => {
 						data[0].status == 'Unknown'
 					) {
 						charger.classList.add('occupied')
-
 						const marker = new mapboxgl.Marker(charger, {
 							scale: 0.9,
 						})
