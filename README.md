@@ -12,7 +12,9 @@
 * [License](https://github.com/samclarkb/hoe-fossielvrij-is-deze-laadpaal2#bookmark-license)
 
 ## :books: Assesment 
+Nederland gaat in hoog tempo over op elektrisch rijden. Maar elektriciteit is nog niet fossielvrij. En met het laden van je elektrische auto stoot je dus CO2 uit. Hoeveel CO2 er vrijkomt hangt af van waar, wanneer en natuurlijk hoeveel energie (kWh) je laadt. Dus hoe weet je hoeveel CO2 er vrijkomt als je je elektrische auto in een specifieke laadpaal plugt?
 
+De Green Caravan heeft een datamodel ontwikkeld waarin energie-opwekking en -handel door heel Europa wordt gecombineerd met energie-mixen van energie-providers. Zo kun je tot op de laadpaal nauwkeurig opvragen hoeveel CO2, zon, wind, hydro, nucleair, kolen, gas en nog meer in een laadsessie zit. Green Caravan heeft niet alleen historische data, maar ook voorspellingen voor de nabije toekomst.
 
 **Goals:** 
 
@@ -20,8 +22,10 @@
 **Rubric:** 
 
 
+Klik [hier](https://github.com/samclarkb/hoe-fossielvrij-is-deze-laadpaal/wiki/Debrief) voor een uitgebreide debrief van de opdracht.
 
 ## :bulb: Concept
+
 
 
 
@@ -48,7 +52,8 @@ geinteresseerd in mijn proces tijdens het maken van dit project? klik [hier](htt
 
 ## :memo: Wishlist
 Er zijn een paar dingen waar ik niet aan toe ben gekomen, maar graag had willen doen:
--
+- Een route beschrijving toevoegen
+- 
 
 
 ## :wrench: Installation
