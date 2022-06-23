@@ -60,7 +60,7 @@ geinteresseerd in mijn proces tijdens het maken van dit project? klik [hier](htt
 
 ## 📌 Wireframe
 
-<img src='https://github.com/samclarkb/hoe-fossielvrij-is-deze-laadpaal/blob/main/public/images/finalWireframe.png' width='750px'/>
+<img src='https://github.com/samclarkb/hoe-fossielvrij-is-deze-laadpaal/blob/main/public/images/finalWireframe.png' width='1000px'/>
 
 ## :repeat: API
 Ik heb verschillende api’s gebruikt tijdens het maken van deze app. De Mapbox api heb ik als eerste geïmplementeerd, deze api zorgt ervoor dat de map wordt getoond. Door het volgende stuk code in mijn head te zetten, zorg ik ervoor dat ik toegang heb tot Mapbox: ```<script defer src="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js"></script> ```.
@@ -82,7 +82,17 @@ Er zijn een paar dingen waar ik niet aan toe ben gekomen, maar graag had willen 
 
 Mocht je er zelf wat aan toe willen voegen, neem vooral je tijd! 
 
+Begin met het kopieren van de repository door middel van het onderstaande stuk code
+
 ``` git clone https://github.com/samclarkb/browser-technologies-2122.git ```
+
+Vervolgens installeer je al de NPM packages 
+
+``` npm install ```
+
+Zet de server aan door het volgende uit te voeren
+
+```npm run start```
 
 ## :mag_right: Recources 
 - mapbox. (z.d.). Getting started. docs.mapbox. Geraadpleegd op 23 juni 2022, van https://docs.mapbox.com/help/getting-started/
