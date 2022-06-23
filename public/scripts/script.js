@@ -1,13 +1,13 @@
 mapboxgl.accessToken =
 	'pk.eyJ1Ijoic2FtY2xhcmtiIiwiYSI6ImNsM3NsMTIwNzAwdWUzYnBjenFwZG1wbjkifQ.fFO4fbulANPhBtywbyszzA'
 
-const loading = document.querySelector('.loader')
+const loading = document.querySelector('.loader') // refers to loading animation
 let data
 let average
 
 const succesLocation = position => {
-	let lat = position.coords.latitude
-	let long = position.coords.longitude
+	let lat = position.coords.latitude // refers to the latitude of the user
+	let long = position.coords.longitude // refres to the longitude of the user
 
 	map.flyTo({
 		center: [long, lat],
@@ -15,16 +15,16 @@ const succesLocation = position => {
 	})
 
 	setupMap([lat, long])
-	loading.style.display = 'none'
+	loading.style.display = 'none' // removing the loading animation
 
 	data = { lat, long }
 
 	const options = {
-		method: 'POST',
+		method: 'POST', // method is post, because i'm sending data to the server
 		headers: { 'Content-type': 'application/json' },
 		body: JSON.stringify(data),
 	}
-	fetch('/home', options)
+	fetch('/home', options) // fetching the long and lat of the user to the server
 		.then(response => response.json())
 		.then(data => {
 			data.forEach(data => {
@@ -40,7 +40,7 @@ const succesLocation = position => {
 						provider: `<span> Provider: </span>` + data.operatorName,
 						availability: '<span> Availabilty: </span>' + data.status,
 						emission:
-							'<span> Emission: </span>' + parseInt(data.sustain) + ' gr CO2 by KWH',
+							'<span> Emission: </span>' + parseInt(data.sustain) + ' gr CO2 by KWH', // parseInt removes all the point decimal numbers
 					},
 				}
 
@@ -56,7 +56,7 @@ const succesLocation = position => {
 						provider: '<span> Provider: </span>' + data.operatorName,
 						availability: '<span> Availabilty: </span>' + data.status,
 						emission:
-							'<span> Emission: </span>' + parseInt(data.sustain) + ' gr CO2 by KWH', //parseInt removes all the point decimal numbers
+							'<span> Emission: </span>' + parseInt(data.sustain) + ' gr CO2 by KWH', // parseInt removes all the point decimal numbers
 					},
 				}
 
@@ -72,10 +72,11 @@ const succesLocation = position => {
 						provider: '<span> Provider: </span>' + data.operatorName,
 						availability: '<span> Availabilty: </span>' + data.status,
 						emission:
-							'<span> Emission: </span>' + parseInt(data.sustain) + ' gr CO2 by KWH',
+							'<span> Emission: </span>' + parseInt(data.sustain) + ' gr CO2 by KWH', // parseInt removes all the point decimal numbers
 					},
 				}
 
+				// declaring the diferent tool tips
 				if (data.sustain < 125) {
 					geojson.features.push(stationData)
 				} else if (data.sustain >= 125 && data.sustain <= 285) {
@@ -89,6 +90,7 @@ const succesLocation = position => {
 				average = 0
 				let sum = 0
 
+				// returning an array with objects that contains the poperty of susatin
 				const newLength = data.filter(d => {
 					if ('sustain' in d) {
 						console.log(d)
@@ -96,18 +98,17 @@ const succesLocation = position => {
 					}
 				})
 
+				// returns a number of all the data in total
 				for (let i = 0; i < data.length; i++) {
+					// using isFinite to tell Javascript it is a finite number
 					if (isFinite(data[i].sustain)) {
 						sum += data[i].sustain
 					}
 				}
-
-				return sum / newLength.length
+				// calculating the average score
+				return sum / newLength.length // newLength.length refers to the array with objects that contains the poperty of susatin
 			}
 			average = calculateAverage(data) // we need to calculate the average to make a scale for the loading points
-
-			console.log(data)
-			console.log(average)
 
 			// add markers to map
 			geojson.features.forEach(element => {
@@ -140,7 +141,6 @@ const succesLocation = position => {
 						data[0].sustain <= average
 					) {
 						charger.classList.add('marker')
-
 						const marker = new mapboxgl.Marker(charger, {
 							scale: 0.9,
 						})
@@ -290,7 +290,7 @@ let geocoder = new MapboxGeocoder({
 		color: 'red',
 	},
 })
-map.addControl(geocoder)
+map.addControl(geocoder) // map refers to the map
 
 geocoder.on('result', event => {
 	const long = event.result.center[0]
@@ -568,18 +568,20 @@ const setupMap = () => {
 			trackUserLocation: true, // When active the map will receive updates to the device's location as it changes.
 			showUserHeading: true, // Draw an arrow next to the location dot to indicate which direction the device is heading.
 		}),
-		'bottom-right'
+		'bottom-right' // location of the button
 	)
 }
 
 const close = document.getElementById('close')
 const open = document.getElementById('open')
-const popup = document.getElementById('popup-container')
+const popup = document.getElementById('popup-container') // refers to the popup
 
+// adding the popup when the user clicks on a button
 open.addEventListener('click', () => {
 	popup.classList.add('show')
 })
 
+// closing the popup when the user clicks on the cross
 close.addEventListener('click', () => {
 	popup.classList.remove('show')
 })
