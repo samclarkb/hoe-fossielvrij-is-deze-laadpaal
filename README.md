@@ -85,7 +85,9 @@ Mocht je er zelf wat aan toe willen voegen, neem vooral je tijd!
 ``` git clone https://github.com/samclarkb/browser-technologies-2122.git ```
 
 ## :mag_right: Recources 
-- 
+- mapbox. (z.d.). Getting started. docs.mapbox. Geraadpleegd op 23 juni 2022, van https://docs.mapbox.com/help/getting-started/
+- Shell. (z.d.). B2B EV Locations. developer.shell. Geraadpleegd op 23 juni 2022, van https://developer.shell.com/api-catalog/v1.0.1/b2b-ev-locations
+- Moelker, J. (z.d.). gc-providers. https://codesandbox.io/. Geraadpleegd op 23 juni 2022, van https://codesandbox.io/s/gc-providers-65hd8r
 
 ## :bookmark: License 
 Copyright (c) 2021 Sam Clark Boot, [MIT](https://github.com/samclarkb/hoe-fossielvrij-is-deze-laadpaal/blob/main/LICENSE)
